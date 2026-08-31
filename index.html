@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חווית קניות ללא כסף</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Candara', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0b0c1e 0%, #1f1f3a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 1100px;
+            width: 100%;
+            background: radial-gradient(circle at 10% 20%, #fcee9c, #f9d56e);
+            border-radius: 4rem 2rem 4rem 2rem;
+            box-shadow: 0 25px 50px -8px rgba(255, 215, 0, 0.6), 0 0 0 8px #ffd966, 0 0 0 12px #ffb347;
+            padding: 2.2rem 2.5rem 3rem;
+            transition: 0.25s;
+            border: 4px solid #f7b731;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2.2rem;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #1b1464;
+            text-shadow: 6px 6px 0 #f9d56e, 10px 10px 0 #ff8c42, 0 10px 30px #ffb800;
+            transform: rotate(-1deg);
+            display: inline-block;
+            background: rgba(255, 255, 200, 0.3);
+            padding: 0.1rem 1.5rem;
+            border-radius: 100px;
+        }
+
+        .subhead {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #2d1b69;
+            background: #ffd966cc;
+            display: inline-block;
+            padding: 0.3rem 2.5rem;
+            border-radius: 60px;
+            margin-top: 0.25rem;
+            backdrop-filter: blur(4px);
+            border: 2px dashed #b45309;
+        }
+
+        /* כפתור התחל קניות ענק */
+        .btn-start-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .btn-start {
+            background: #ff4d6d;
+            background: linear-gradient(135deg, #ff1e3c, #ff6b8a);
+            border: none;
+            border-radius: 120px;
+            padding: 1.5rem 5rem;
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: #fff9e6;
+            text-shadow: 0 4px 0 #a1001e, 0 8px 20px #d9002b;
+            box-shadow: 0 20px 30px -8px #b3002d, 0 0 0 8px #fcee9c, 0 0 0 14px #ff8c42;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            letter-spacing: 4px;
+            transform: scale(1);
+            border: 4px solid #ffbe0b;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #ff2a4a, #ff7f9e);
+            box-shadow: 0 24px 40px -6px #b3002d, 0 0 0 10px #fcee9c, 0 0 0 18px #ff8c42;
+        }
+
+        .btn-start:active {
+            transform: scale(0.96);
+        }
+
+        /* שלבי החוויה */
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 2.2rem;
+            background: #1b1464cc;
+            backdrop-filter: blur(6px);
+            border-radius: 60px 20px 60px 20px;
+            padding: 1.8rem 1.2rem;
+            margin: 2rem 0 2rem;
+            border: 4px solid #f7b731;
+            box-shadow: inset 0 0 20px #f9d56e;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #fff5d6;
+            padding: 0.6rem 1.8rem 0.6rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #1b1464;
+            box-shadow: 0 6px 0 #b45309;
+            border: 2px solid #f7b731;
+        }
+
+        .step-item span {
+            background: #ff8c42;
+            color: white;
+            border-radius: 50%;
+            width: 2.2rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.3rem;
+            box-shadow: 0 0 0 2px #fcee9c;
+        }
+
+        .savings-badge {
+            background: #00c9a7;
+            background: linear-gradient(145deg, #00d4a0, #00a37a);
+            color: #002b1f;
+            font-size: 2.2rem;
+            font-weight: 800;
+            padding: 0.3rem 2.5rem;
+            border-radius: 80px;
+            display: inline-block;
+            border: 4px solid #f9d56e;
+            box-shadow: 0 0 0 4px #1b1464;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .disclaimer {
+            background: #2d1b69e0;
+            backdrop-filter: blur(4px);
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            border-right: 12px solid #ffbe0b;
+            border-left: 12px solid #ffbe0b;
+            color: #fef9e0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 2.2rem 0 1.8rem;
+            box-shadow: 0 0 0 4px #f7b731;
+        }
+
+        .disclaimer i {
+            font-style: normal;
+            background: #ffbe0b;
+            color: #1b1464;
+            padding: 0.1rem 1rem;
+            border-radius: 40px;
+            margin: 0 0.3rem;
+        }
+
+        .login-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem 3rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 6px dotted #ff8c42;
+        }
+
+        .login-card {
+            background: #ffd966;
+            padding: 0.8rem 2.2rem;
+            border-radius: 80px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1b1464;
+            border: 4px solid #1b1464;
+            box-shadow: 0 8px 0 #1b1464;
+            transition: 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .login-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #1b1464;
+            background: #fcee9c;
+        }
+
+        .login-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #1b1464;
+        }
+
+        .login-card a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .file-note {
+            background: #0b0c1e;
+            color: #fcee9c;
+            padding: 0.3rem 1.8rem;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: 2px solid #f9d56e;
+            display: inline-block;
+            margin-top: 0.4rem;
+        }
+
+        /* התאמה למובייל */
+        @media (max-width: 700px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .btn-start {
+                font-size: 2.5rem;
+                padding: 1rem 2rem;
+            }
+            .step-item {
+                font-size: 1.1rem;
+                padding: 0.4rem 1.2rem;
+            }
+            .disclaimer {
+                font-size: 1.1rem;
+                padding: 0.8rem 1rem;
+            }
+            .login-card {
+                font-size: 1.2rem;
+                padding: 0.6rem 1.5rem;
+            }
+            .subhead {
+                font-size: 1.4rem;
+                padding: 0.2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+
+    <!-- כותרת -->
+    <div class="hero">
+        <h1>🛍️ חווית קניות</h1>
+        <div class="subhead">ללא כסף · בלי מציאות</div>
+    </div>
+
+    <!-- כפתור התחל קניות ענק -->
+    <div class="btn-start-wrapper">
+        <button class="btn-start" onclick="alert('✨ מתחילים את הסימולציה! (כאן ייפתח דף הקניות המדומה)')">
+            🛒 התחל בקניות
+        </button>
+    </div>
+
+    <!-- שלבי החוויה + חיסכון -->
+    <div class="steps">
+        <div class="step-item"><span>1</span> בחר מוצרים</div>
+        <div class="step-item"><span>2</span> מלא את הסל</div>
+        <div class="step-item"><span>3</span> שלם בכאילו</div>
+        <div class="step-item"><span>4</span> חכה למשלוח שיצא</div>
+        <div class="step-item" style="background: #f9d56e; border-color: #b45309;"><span>💰</span> וחסכת</div>
+    </div>
+
+    <!-- תגית חיסכון בולטת -->
+    <div style="text-align: center;">
+        <span class="savings-badge">💸 חסכת 0₪ (עדיין לא התחלת)</span>
+    </div>
+
+    <!-- הסבר שהכל דימוי -->
+    <div class="disclaimer">
+        <i>🧠</i>   שים לב:   <i>🧾</i><br>
+        כל הפעולות כאן הן <strong>סימולציה</strong> – אין קנייה אמיתית, אין שליח אמיתי, ואין כסף אמיתי. 
+        זהו משחק חווייתי לראות "כמה חסכת" במצב דמיוני בלבד.
+    </div>
+
+    <!-- התחברות / יצירת משתמש - עם קישורים לדפים חדשים -->
+    <div class="login-area">
+        <div class="login-card">
+            <a href="login.html" target="_blank">
+                🔐 התחברות
+            </a>
+        </div>
+        <div class="login-card">
+            <a href="register.html" target="_blank">
+                ✨ הרשמה
+            </a>
+        </div>
+    </div>
+
+    <!-- הסבר שמות הקבצים -->
+    <div style="text-align: center; margin-top: 0.8rem;">
+        <span class="file-note">
+            📄 דף התחברות: <strong>login.html</strong> &nbsp;|&nbsp; דף הרשמה: <strong>register.html</strong>
+        </span>
+        <span class="file-note" style="margin-right: 0.8rem; background: #ff8c42; color: #1b1464;">
+            🔗 קישור "התחל בקניות" יוביל לדף: <strong>shop.html</strong> (לדוגמה)
+        </span>
+    </div>
+
+    <!-- הערה קטנה על כפתור ההתחל -->
+    <div style="text-align: center; margin-top: 1rem; color: #1b1464; font-weight: 600; background: #fcee9c80; border-radius: 60px; padding: 0.3rem 1rem; display: inline-block; width: auto; margin-left: auto; margin-right: auto;">
+        ⚡ כפתור "התחל בקניות" – מוביל לדף <strong>shop.html</strong> (ניתן לשנות)
+    </div>
+</div>
+
+<script>
+    // אפשרות להרחבה – לדוגמה לחיצה על כפתור התחל שתפנה לדף shop.html
+    document.querySelector('.btn-start').addEventListener('click', function() {
+        // משנה את הכתובת לדף הקניות המדומה – אפשר לשנות
+        window.location.href = 'shop.html'; 
+    });
+</script>
+</body>
+</html>
