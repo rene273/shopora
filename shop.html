@@ -1,1 +1,342 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שוק הווירטואלי - חנות כללית</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Candara', system-ui, sans-serif;
+        }
 
+        body {
+            background: linear-gradient(145deg, #0b0c1e 0%, #1f1f3a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 1200px;
+            width: 100%;
+            background: radial-gradient(circle at 10% 20%, #fcee9c, #f9d56e);
+            border-radius: 4rem 2rem 4rem 2rem;
+            box-shadow: 0 25px 50px -8px rgba(255, 215, 0, 0.6), 0 0 0 8px #ffd966, 0 0 0 12px #ffb347;
+            padding: 2.2rem 2.5rem 3rem;
+            border: 4px solid #f7b731;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 6px dotted #ff8c42;
+            padding-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: #1b1464;
+            text-shadow: none;
+            letter-spacing: 2px;
+            background: rgba(255, 255, 200, 0.3);
+            padding: 0.1rem 1.5rem;
+            border-radius: 100px;
+        }
+
+        .header .store-badge {
+            background: #ff4d6d;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff9e6;
+            border: 4px solid #ffbe0b;
+            box-shadow: 0 8px 0 #a1001e;
+            text-shadow: 0 2px 0 #a1001e;
+        }
+
+        .subhead {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d1b69;
+            background: #ffd966cc;
+            display: inline-block;
+            padding: 0.3rem 2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            border: 2px dashed #b45309;
+            margin: 1rem 0 1.8rem;
+        }
+
+        /* קטגוריות */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .category-card {
+            background: #fff5d6;
+            border-radius: 30px 10px 30px 10px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            border: 4px solid #f7b731;
+            box-shadow: 0 10px 0 #b45309;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 0 #b45309;
+        }
+
+        .category-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 6px 0 #b45309;
+        }
+
+        .category-card .emoji {
+            font-size: 4.5rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .category-card .name {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #1b1464;
+            margin-bottom: 0.2rem;
+        }
+
+        .category-card .desc {
+            font-size: 1rem;
+            color: #4a3a7a;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .category-card .enter-btn {
+            background: #00c9a7;
+            border: none;
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #002b1f;
+            border: 3px solid #1b1464;
+            box-shadow: 0 6px 0 #1b1464;
+            cursor: pointer;
+            transition: 0.1s ease;
+            width: 100%;
+        }
+
+        .category-card .enter-btn:hover {
+            transform: scale(1.03);
+            background: #00e0b8;
+        }
+
+        .category-card .enter-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #1b1464;
+        }
+
+        /* סל תחתון */
+        .bottom-area {
+            background: #1b1464cc;
+            backdrop-filter: blur(6px);
+            border-radius: 60px 20px 60px 20px;
+            padding: 1.5rem 2rem;
+            border: 4px solid #f7b731;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .bottom-area .info {
+            color: #fef9e0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .bottom-area .info span {
+            background: #ffbe0b;
+            color: #1b1464;
+            padding: 0.1rem 1.2rem;
+            border-radius: 60px;
+            font-size: 1.6rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #1b1464;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: #ffd966;
+            padding: 0.3rem 2rem;
+            border-radius: 60px;
+            border: 3px solid #1b1464;
+            box-shadow: 0 6px 0 #1b1464;
+            transition: 0.1s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 0 #1b1464;
+        }
+
+        .back-link:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #1b1464;
+        }
+
+        .btn-cart {
+            background: linear-gradient(135deg, #ff1e3c, #ff6b8a);
+            border: none;
+            border-radius: 120px;
+            padding: 0.7rem 2.5rem;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #fff9e6;
+            text-shadow: 0 4px 0 #a1001e;
+            box-shadow: 0 10px 0 #a1001e, 0 0 0 6px #fcee9c, 0 0 0 10px #ff8c42;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 4px solid #ffbe0b;
+            letter-spacing: 1px;
+        }
+
+        .btn-cart:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #ff2a4a, #ff7f9e);
+            box-shadow: 0 14px 0 #a1001e, 0 0 0 8px #fcee9c, 0 0 0 12px #ff8c42;
+        }
+
+        .btn-cart:active {
+            transform: translateY(6px);
+            box-shadow: 0 4px 0 #a1001e, 0 0 0 6px #fcee9c, 0 0 0 10px #ff8c42;
+        }
+
+        @media (max-width: 700px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .header .store-badge {
+                font-size: 1.2rem;
+                padding: 0.3rem 1.2rem;
+            }
+            .subhead {
+                font-size: 1.2rem;
+            }
+            .category-card .emoji {
+                font-size: 3.5rem;
+            }
+            .category-card .name {
+                font-size: 1.3rem;
+            }
+            .bottom-area .info {
+                font-size: 1.1rem;
+            }
+            .btn-cart {
+                font-size: 1.1rem;
+                padding: 0.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+
+    <!-- כותרת -->
+    <div class="header">
+        <h1>🌐 שוק הווירטואלי</h1>
+        <div class="store-badge">🛒 חנות כללית</div>
+    </div>
+
+    <div class="subhead">🎯 בחר קטגוריה והתחל לקנות (בדמיון)</div>
+
+    <!-- קטגוריות -->
+    <div class="categories-grid">
+        <div class="category-card">
+            <span class="emoji">👗</span>
+            <div class="name">אופנה</div>
+            <div class="desc">בגדים, נעליים ואביזרים</div>
+            <button class="enter-btn" onclick="window.location.href='category-fashion.html'">🚪 כניסה</button>
+        </div>
+
+        <div class="category-card">
+            <span class="emoji">💻</span>
+            <div class="name">טכנולוגיה</div>
+            <div class="desc">מכשירים וגאדג'טים</div>
+            <button class="enter-btn" onclick="window.location.href='category-tech.html'">🚪 כניסה</button>
+        </div>
+
+        <div class="category-card">
+            <span class="emoji">🛋️</span>
+            <div class="name">בית ועיצוב</div>
+            <div class="desc">רהיטים, תאורה וקישוטים</div>
+            <button class="enter-btn" onclick="window.location.href='category-home.html'">🚪 כניסה</button>
+        </div>
+
+        <div class="category-card">
+            <span class="emoji">📚</span>
+            <div class="name">ספרים ומוזיקה</div>
+            <div class="desc">ספרים, תקליטים וסרטים</div>
+            <button class="enter-btn" onclick="window.location.href='category-books.html'">🚪 כניסה</button>
+        </div>
+
+        <div class="category-card">
+            <span class="emoji">🧸</span>
+            <div class="name">צעצועים</div>
+            <div class="desc">משחקים, בובות ומתנות</div>
+            <button class="enter-btn" onclick="window.location.href='category-toys.html'">🚪 כניסה</button>
+        </div>
+
+        <div class="category-card">
+            <span class="emoji">💪</span>
+            <div class="name">ספורט</div>
+            <div class="desc">ציוד ובגדי ספורט</div>
+            <button class="enter-btn" onclick="window.location.href='category-sports.html'">🚪 כניסה</button>
+        </div>
+    </div>
+
+    <!-- אזור תחתון -->
+    <div class="bottom-area">
+        <div class="info">
+            🛒 הסל שלך: <span>0 מוצרים</span> 💰 ₪0
+        </div>
+        <button class="btn-cart" onclick="window.location.href='cart.html'">
+            ➡️ לעגלת הקניות
+        </button>
+    </div>
+
+    <!-- חזרה לדף הבית -->
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="index.html" class="back-link">⬅️ חזרה לדף הבית</a>
+    </div>
+
+</div>
+</body>
+</html>
